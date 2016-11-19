@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Créer votre compte</title>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+        <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <!-- Optional theme -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="sign-up.css" media="screen" title="no title" charset="utf-8">
+    <link href="https://fonts.googleapis.com/css?family=Archivo+Narrow" rel="stylesheet">
+  </head>
+  <body>
+      <div class="container-fluid en-tete">
+        <div class="row">
+          <div class="col-lg-1 col-xs-1">
+            <div class="element-en-tete1"></div>
+          </div>
+          <div class="col-lg-11 col-xs-11">
+            <div class="element-en-tete-droit">
+              <div class="element-en-tete2"></div>
+              <div class="element-en-tete2"></div>
+              <div class="element-en-tete2"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    <h1>Créer votre compte</h1>
+        <!--TOFIX : améliorer la sortie des messages d'erreurs-->
+        <div id="erreurs">
+          <div id="erreurLogin"></div>
+          <div id="erreurLogin2"></div>
+          <div id="erreurMdp"></div>
+          <div id="erreurMdpConfirm"></div>
+        </div>
+
+    <div class="container">
+      <form class="form-horizontal">
+
+        <div class="form-group">
+          <label class="control-label col-sm-2 col-xs-2" for="nom">Nom:</label>
+          <div class="col-sm-10 col-xs-10">
+            <input type="text" class="form-control" id="nom" placeholder="Dupont">
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="control-label col-sm-2 col-xs-2" for="prenom">Prenom:</label>
+          <div class="col-sm-10 col-xs-10">
+            <input type="text" class="form-control" id="prenom" placeholder="Jean">
+          </div>
+        </div>
+
+        <div class="form-group">
+            <label class="control-label col-sm-2 col-xs-2" for="sexe">Sexe:</label>
+            <div class="checkbox">
+              <label><input type="radio" name="sexe" class="sexe"> Femme</label>
+              <label><input type="radio" name="sexe" class="sexe"> Homme</label>
+            </div>
+          </div>
+
+      <div class="form-group">
+          <label class="control-label col-sm-2 col-xs-2" for="login">Login (mail):</label>
+          <div class="col-sm-10 col-xs-10">
+            <input type="login" class="form-control" id="login" placeholder="jean.dupont@gmail.com">
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="control-label col-sm-2 col-xs-2" for="mdp">Mot de passe:</label>
+          <div class="col-sm-10 col-xs-10">
+            <input type="password" class="form-control" id="mdp" placeholder="********">
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="control-label col-sm-2 col-xs-2" for="mdpConfirm">Confirmer mot de passe:</label>
+          <div class="col-sm-10 col-xs-10">
+            <input type="password" class="form-control" id="mdpConfirm" placeholder="********">
+          </div>
+        </div>
+
+        <div class="form-group">
+            <label class="control-label col-sm-2 col-xs-2" for="status">Status: </label>
+            <div class="checkbox">
+              <label><input type="radio" name="status" class="status"> Professionel</label>
+              <label><input type="radio" name="status" class="status"> Particulier</label>
+            </div>
+          </div>
+
+        <div class="form-group">
+          <div class="col-sm-offset-3 col-sm-10 col-xs-offset-3 col-xs-10">
+            <button type="submit" class="btn btn-default col-sm-10 col-xs-10" onclick="nouveauCompte()" ;>Submit</button>
+          </div>
+        </div>
+        </div>
+      </form>
+ <!-- TODO : authentification via Facebook -->
+    <script type="text/javascript">
+
+    function nouveauCompte(){
+        var nom = document.getElementById("nom").value;
+        var prenom = document.getElementById("prenom").value;
+        var sexe1= document.getElementsByClassName("sexe")[0].checked;
+        var sexe2= document.getElementsByClassName("sexe")[1].checked;
+        var login = document.getElementById("login").value;
+        var mdp = document.getElementById("mdp").value;
+        var mdpConfirm = document.getElementById("mdpConfirm").value;
+        var status1 = document.getElementsByClassName("status")[0].checked;
+        var status2 = document.getElementsByClassName("status")[1].checked;
+        // TOFIX : mettre plus de verification nottament pour le nom et prenom pas de caracteres speciaux (voir la methode dans les input html css)
+        ajaxCharge();
+        if(nom !== "" && prenom !== "" && sexe1 || sexe2 == true && login !== "" && mdp !== "" && mdpConfirm !== "" && status1 || status2 == true){
+          if (login.indexOf("@") < 1){
+            document.getElementById("erreurLogin").innerHTML = "Mauvais format, pour rappel il doit comporter au moins un @";
+          }if (login.length < 4){
+            document.getElementById("erreurLogin2").innerHTML = "Le login doit comporter au moins 4 caractères";
+          }if(mdp.length < 4){
+            document.getElementById("erreurMdp").innerHTML = "Le mot de passe doit comporter au moins 4 caractères";
+          }if (mdp !== mdpConfirm){
+            document.getElementById("erreurMdpConfirm").innerHTML = "Les mots de passe ne correspondent pas";
+          }else{
+            document.getElementById("erreurs").innerHTML = "Hello";
+          }
+        }
+        else{
+          document.getElementById("erreurs").innerHTML = "Vous n\'avez rien saisi dans les ou l\'un des champs";
+        }
+      }
+
+      function ajaxCharge(){
+        //lorque ca à été submité dans le id form
+            //l'equivalent du XMLHttpRequest.... en js
+            $.ajax({
+              type : 'GET',
+              url : 'insert-donnees.php',
+              //on recupere toutes le contenu du formulaire
+              //si c'est tout ok alors on envoi ce message à l'utilisateur
+            }).done(function(){
+              alert('Votre compte à été crée avec succès');
+            });
+            return false;
+      }
+    </script>
+  </body>
+</html>

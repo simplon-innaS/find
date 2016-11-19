@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="pageprofilparticulier.css">
+    <link href="https://fonts.googleapis.com/css?family=Archivo+Narrow" rel="stylesheet">
+    <title>Page profil particulier</title>
+  </head>
+
+  <body>
+    <input type="button" name="name" value="ajax" onclick="ajaxCharge();">
+    <nav id="menu-gauche">
+      <ul>
+        <li id="login">Photo</li>
+        <li id="mdp">Following | Follower</li>
+        <li>Inna</li>
+        <li>SARI</li>
+        <li>99 ans</li>
+        <li>inna.sari@gmail.com</li>
+        <li>Paramètres</li>
+      </ul>
+    </nav>
+
+    <div id="contenu-centrale">
+      <nav id="menu-haut">
+        <li>Ce que je cherche</li>
+        <li>Trouvé</li>
+        <li>Répondu</li>
+        <li>Like</li>
+      </nav>
+
+        <div class="fiche-produit">
+          <header class="header-produit">
+            <img src="" alt="" id="status-produit" />image<br>
+            <img src="" alt="" id="photo-produit"/>image<br>
+            <span id="description-produit">Description</span>
+          </header>
+
+          <span class="wp-produit">
+            <span id="categorie-produit">Catégorie : Robe</span><br>
+            <span id="type-produit">Type : Chic</span><br>
+            <span id="couleur-produit">Couleur: <img src="" alt="" id="noir"/></span><br>
+            <span id="prix-produit">Prix : 15€</span><br>
+            <span id="action-produit">
+              <img src="" alt="" id="jaime" />image
+              <img src="" alt="" id="partager" />image
+            </span>
+
+            <footer class="footer-produit">
+                <span id="info-auteur">
+                  <img src="" alt="" />image<br>
+                  <span>Jean</span><br>
+                  <span>Dupont</span>
+                </span>
+                <span id="contenu-footer">
+                  <ul>
+                    <li>Commentaire :</li><br>
+                    <li>Lien :</li>
+                  </ul>
+                </span>
+                <span id="photo-produit-trouve">
+                  <img src="" alt=""/>image
+                </span>
+            </footer>
+            <script type="text/javascript">
+            function ajaxCharge() {
+
+              var xhr=null;
+
+              if (window.XMLHttpRequest) {
+                  xhr = new XMLHttpRequest();
+              }
+              else if (window.ActiveXObject)
+              {
+                  xhr = new ActiveXObject("Microsoft.XMLHTTP");
+              }
+              //on définit l'appel de la fonction au retour serveur
+              xhr.onreadystatechange = function() {};
+              var logina = document.getElementById("login").value;
+              var mdpa = document.getElementById("mdp").value;
+              //on appelle le fichier reponse.txt
+              xhr.open("GET", "recupere-donnees.php?login="+login+"&mdp"+mdp, true);
+              xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");//ligne très importante pour la methode post ( des http headers)
+              xhr.send(null);
+
+              // document.getElementById("login").innerHTML = mdp;
+              console.log(login);
+            }
+            </script>
+          </span>
+        </div>
+      </div>
+  </body>
+</html>
