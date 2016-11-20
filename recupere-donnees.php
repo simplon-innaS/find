@@ -1,7 +1,7 @@
 <?php
 try{
   // On se connecte à MySQL
-    $bdd = new PDO('mysql:host=localhost;dbname=test;charset=utf8', 'root', '');
+    $bdd = new PDO('mysql:host=localhost;dbname=find;charset=utf8', 'root', '');
 
 }
 
@@ -11,12 +11,13 @@ catch(Exception $e){
 }
 $requete = $bdd->query(
 'SELECT *
- FROM test
- WHERE nom = "Jean" AND prenom = "Dupont" ;'
+ FROM utilisateur
+ WHERE login = "inna.sarib@gmail.com" AND mdp= "aaaaaaa";'
 );
 
  while($donnees = $requete->fetch()){
-	 echo $donnees['nom'],
+	 echo $donnees['login'],
+   $donnees['nom'],
    $donnees['prenom'];
  };
 ?>

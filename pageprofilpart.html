@@ -25,7 +25,7 @@
               <div class="element-en-tete element-en-tete2"></div>
               <div class="element-en-tete element-en-tete2"></div>
               <div class="element-en-tete element-en-tete2"></div>
-              <div class="element-en-tete element-en-tete3"><a href="sign-up.html">SE Co</a></div>
+              <div class="element-en-tete element-en-tete3"><a href="sign-up.html">Se Connecter</a></div>
             </div>
           </div>
         </div>
@@ -34,24 +34,25 @@
       <div class="container">
         <div class="col-lg-2 col-xs-2 bloc-gauche">
           <div id="photo"></div>
-          <div>Login</div>
-          <div>Nom</div>
-          <div>Prenom</div>
+          <div id="login">Login</div>
+          <div id="nom">Nom</div>
+          <div id="prenom">Prenom</div><br>
           <div>Paramètres</div>
+          <input type="button" name="affichedonnees" onclick="afficheDonnees();" value="ajax">
         </div>
 
         <div class="col-lg-9 col-xs-9 bloc-droit">
           <div class="menu-bloc-droit">
-            <div>Ce que je cherche</div>
+            <div><a href="#">Ce que je cherche</a></div>
             <div>|</div>
-            <div>Trouvé</div>
+            <div><a href="#">Trouvé</a></div>
             <div>|</div>
-            <div>Repondu</div>
+            <div><a href="#">Repondu</a></div>
             <div>|</div>
-            <div>Like</div>
+            <div><a href="#">Like</a></div>
           </div>
         <div class="col-lg-5 fiche-produit">
-          <div class="photo-produit"></div>
+          <div class="photo-produit"><img src="Li9vohYUDHc.jpg"/></div>
           <div>|</div>
           <div>Trouvé</div>
           <div>|</div>
@@ -60,14 +61,14 @@
         <div class="col-lg-2">
         </div>
         <div class="col-lg-5 fiche-produit">
-          <div class="photo-produit"></div>
+          <div class="photo-produit"><img src="MKR-jTJTMQ4.jpg"/></div>
           <div>|</div>
           <div>Trouvé</div>
           <div>|</div>
           <div>Repondu</div>
         </div>
         <div class="col-lg-5 fiche-produit">
-          <div class="photo-produit"></div>
+          <div class="photo-produit"><img src="ISrWrUFtozE.jpg"/></div>
           <div>|</div>
           <div>Trouvé</div>
           <div>|</div>
@@ -76,17 +77,39 @@
         <div class="col-lg-2">
         </div>
         <div class="col-lg-5 fiche-produit">
-          <div class="photo-produit"></div>
+          <div class="photo-produit"><img src="wOec9dANiyQ.jpg"/></div>
           <div>|</div>
           <div>Trouvé</div>
           <div>|</div>
           <div>Repondu</div>
-        </div>
-
         </div>
 
       </div>
+    </div>
 
+    <script>
+    function afficheDonnees(){
 
+        if (window.XMLHttpRequest) {
+            xhr = new XMLHttpRequest();
+          }
+          else if (window.ActiveXObject)
+          {
+            xhr = new ActiveXObject("Microsoft.XMLHTTP");
+          }
+      var login = document.getElementById("login").value;
+      var nom = document.getElementById("nom").value;
+      var prenom = document.getElementById("prenom").value;
+      //on appelle le fichier reponse.txt
+      xhr.open("POST", "recupere-donnees.php", true);
+      xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");//ligne très importante pour la methode post ( des http headers)
+      xhr.onreadystatechange = function() {
+       if(xhr.readyState === 4 && xhr.status === 200) {
+       document.getElementById("nom").innerHTML = xhr.responseText;
+       }
+     }
+     xhr.send('login='+login+'&nom='+nom+'&prenom='+prenom);
+     }
+    </script>
   </body>
   </html>

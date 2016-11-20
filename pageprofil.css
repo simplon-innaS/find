@@ -4,6 +4,9 @@
   box-sizing:border-box;
   list-style:none;
 }
+a :link{
+  color: #898989;
+}
 .bloc-gauche{
   margin-top: 20px;
   float: left;
@@ -36,7 +39,7 @@
   margin-bottom: 30px;
   padding: 20px;
 }
-.photo-produit{
+.photo-produit img{
   margin: 0 auto;
   margin-bottom: 20px;
   height: 350px;
