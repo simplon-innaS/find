@@ -10,6 +10,7 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
     <!-- Optional theme -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+    <link rel="stylesheet" href="entetestylef.css" media="screen" title="no title" charset="utf-8">
     <link rel="stylesheet" href="sign-up.css" media="screen" title="no title" charset="utf-8">
     <link href="https://fonts.googleapis.com/css?family=Archivo+Narrow" rel="stylesheet">
   </head>
@@ -34,7 +35,7 @@
 
     <div class="container">
       <form class="form-horizontal col-lg-6 col-xs-12">
-        <p class="col-lg-offset-3">Crée votre compte</p>
+        <p class="col-lg-offset-2 titre-creation">Crée votre compte</p>
         <div class="form-group">
           <label class="control-label col-lg-4 col-xs-3" for="nom">Nom:</label>
           <div class="col-sm-8 col-xs-8">
@@ -88,7 +89,7 @@
 
         <div class="form-group">
           <div class="col-lg-offset-4 col-xs-offset-3 col-xs-8">
-            <button type="submit" class="col-lg-12 col-xs-12" id="submit" onclick="ajaxCreation()">Créer un compte</button>
+            <button type="submit" class="col-lg-12 col-xs-12" id="submit" onclick="nouveauCompte()">Créer un compte</button>
           </div>
         </div>
 
@@ -146,7 +147,6 @@
           }if (mdp !== mdpConfirm){
             alert("Les mots de passe ne correspondent pas");
           }else{
-            alert("Felicitation, votre compte à bien été créé");
             ajaxCreation();
           }
         }
@@ -169,7 +169,10 @@
       }
       //on définit l'appel de la fonction au retour serveur
       xhr.onreadystatechange = function() {
-      };
+       if(xhr.readyState === 4 && xhr.status === 200) {
+       alert(xhr.responseText);
+       }
+     }
 
       var nom = document.getElementById("nom").value;
       var prenom = document.getElementById("prenom").value;
@@ -191,6 +194,11 @@
     }
 
       function ajaxConnexion(){
+        var loginco = document.getElementById("loginco").value;
+        var mdpco = document.getElementById("mdpco").value;
+        //TOFIX mettre tout en lower case
+        if(loginco !== "" && mdpco !== ""){
+
         if (window.XMLHttpRequest) {
             xhr = new XMLHttpRequest();
         }
@@ -203,7 +211,7 @@
         var mdpco = document.getElementById("mdpco").value;
 
         //on appelle le fichier reponse.txt
-        xhr.open("POST", "recupere-donnees.php", true);
+        xhr.open("POST", "verifie-authentification.php", true);
         xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");//ligne très importante pour la methode post ( des http headers)
         xhr.onreadystatechange = function() {
          if(xhr.readyState === 4 && xhr.status === 200) {
@@ -211,7 +219,10 @@
          }
        }
         xhr.send('loginco='+loginco+'&mdpco='+mdpco);
+      }else{
+        alert("Vous n\'avez rien saisi dans les ou l\'un des champs")
       }
+    }
     </script>
   </body>
 </html>

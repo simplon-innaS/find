@@ -1,0 +1,32 @@
+*{
+  font-family: 'Archivo Narrow', 'Arial';
+  text-align: center;
+  color: #898989;
+  box-sizing:border-box;
+}
+/*en tete*/
+.en-tete{
+  height: 100px;
+  background-color: #E1BF7F;
+}
+.element-en-tete-droit{
+  display: flex;
+  justify-content: space-around;
+  float: right;
+}
+.element-en-tete{
+height: 80px;
+width: 80px;
+background-color: #E1BF7F;
+margin-top: 10px;
+border: 1px #898989 solid;
+}
+.element-en-tete1{
+  float: left;
+}
+.element-en-tete2{
+  margin-left: 10px;
+}
+.element-en-tete3{
+  margin-left: 6%;
+}
