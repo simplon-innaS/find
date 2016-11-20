@@ -1,29 +1,20 @@
 <?php
-$mysqli = new mysqli ('localhost', 'root', '', 'test');
+try{
+    // On se connecte à MySQL
+    $bdd = new PDO('mysql:host=localhost;dbname=test;charset=utf8', 'root', '');
+}
 
-if ($mysqli->connect_error) {
-	die('Erreur de connexion'); //message si ca ne fonctionne pas
-};
+catch(Exception $e){
+    // En cas d'erreur, on affiche un message et on arrête tout
+        die('Erreur : '.$e->getMessage());
+}
 
-$mysqli->query('SET NAMES UTF8'); //pour ne pas avoir de problemes de reconnaissance de caractere speciaux
-
-session_start();
-
-
-//renvoi vers la bdd
-$id = 'aaaa'; //on recupere l'id grace à la variable profile on cible l'id
-$name = 'sqdsqdqsd';
-$firstname =  'sqdqsdqs';
-$lastname =  'aaaazaz';
-$email =  'jean.dupond@sdjsd.de';
-
-$mysqli->query( //la requete sql
-		'INSERT INTO user (nom, prenom, login, mdp)
-		VALUES ("' . $id .
-			'", "' . $name .
-			'", "' . $firstname .
-			'", "' . $lastname .
-			'", "' . $email .
+$bdd->query( //la requete sql
+		'INSERT INTO test (login, mdp, nom, prenom)
+		VALUES ("' . $_POST['login'] .
+			'", "' . $_POST['mdp'] .
+			'", "' . $_POST['nom'] .
+			'", "' . $_POST['prenom'] .
 			'");'
 	);
 ?>

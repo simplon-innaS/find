@@ -2,7 +2,6 @@
 try{
   // On se connecte à MySQL
     $bdd = new PDO('mysql:host=localhost;dbname=test;charset=utf8', 'root', '');
-
 }
 
 catch(Exception $e){
@@ -10,17 +9,19 @@ catch(Exception $e){
         die('Erreur : '.$e->getMessage());
 }
 
-$requete = $bdd->query(
-'SELECT *
+$loginco = $_POST["loginco"];
+$mdpco = $_POST["mdpco"];
+
+$find = $requete = $bdd->query(
+"SELECT count(login AND mdp)
  FROM test
- WHERE login = "jean.dupon" AND mdp = "12345" ;'
+ WHERE login = '$loginco'
+ AND mdp = '$mdpco';"
 );
-
- while($donnees = $requete->fetch()){
-	 echo $GET['login'] = $donnees['nom'];
-  //  $prenom = $donnees['prenom'];
-  //  $login = $donnees['login'];
-  //  $mdp = $donnees['mdp'];
-
- };
+$find->execute();
+if ($find->fetchColumn() > 0){
+    echo $loginco;
+}else{
+  echo $mdpco;
+}
 ?>

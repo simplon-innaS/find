@@ -1,0 +1,28 @@
+*{
+  font-family: 'Archivo Narrow', sans-serif;
+}
+body{
+  -webkit-background-size: cover;
+  -moz-background-size: contain;
+  -o-background-size: cover;
+  background-size: cover;
+  overflow:visible;;
+  background-image: url('pageacc.png');
+}
+
+#slogan{
+
+  margin-top: 70px;
+  font-size: 150px;
+}
+.bloc{
+  height: 15vw;
+  width: 15vw;
+  background-color: red;
+
+}
+#categories{
+  display: flex;
+  justify-content: space-around;
+
+}

@@ -8,20 +8,16 @@
   </head>
   <body>
     <h1>Connectez-vous</h1>
-        <!--TOFIX : améliorer la sortie des messages d'erreurs-->
-        <div id="erreurs">
-          <div id="erreurLogin"></div>
-          <div id="erreurLogin2"></div>
-          <div id="erreurMdp"></div>
-          <div id="erreurMdpConfirm"></div>
-        </div>
+      <form method="post">
+
         <table>
+
         <tr>
           <td>
             <p>Login ss:</p>
           </td>
           <td>
-            <input id="login" type="text" placeholder="jean.dupont"/>
+            <input id="login" name="login" type="text" placeholder="jean.dupont"/>
           </td>
         </tr>
         <tr>
@@ -29,12 +25,14 @@
             <p id="mdpecrit">Mot de passe:</p>
           </td>
           <td>
-            <input id="mdp" type="password" placeholder="*********" />
+            <input id="mdp" name="mdp" type="password" placeholder="*********" />
           </td>
         </tr>
         <tr>
           <td>
-<input type="submit" onclick="ajaxCharge();">          </td>
+            <input type="submit" onclick="ajaxCharge()">
+          </td>
+          <div id="status"> </div>
         </tr>
         <tr>
           <td>
@@ -51,13 +49,14 @@
           </td>
         </tr>
       </table>
+    </form>
+
     <script type="text/javascript">
 
 
 
       function ajaxCharge() {
 
-            var xhr=null;
 
     if (window.XMLHttpRequest) {
         xhr = new XMLHttpRequest();
@@ -66,16 +65,20 @@
     {
         xhr = new ActiveXObject("Microsoft.XMLHTTP");
     }
-    //on définit l'appel de la fonction au retour serveur
-    xhr.onreadystatechange = function() { document.getElementById("mdpecrit").innerHTML = "yoooo"; };
 
     var login = document.getElementById("login").value;
     var mdp = document.getElementById("mdp").value;
 
     //on appelle le fichier reponse.txt
-    xhr.open("POST", "insert-donnees.php", true);
+    xhr.open("POST", "recupere-donnees.php", true);
     xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");//ligne très importante pour la methode post ( des http headers)
+    xhr.onreadystatechange = function() {
+     if(xhr.readyState == 4 && xhr.status == 200) {
+     alert(xhr.responseText);
+     }
+   }
     xhr.send('login='+login+'&mdp='+mdp);
+    document.getElementById("status").innerHTML = "processing...";
 }
 
 
