@@ -11,13 +11,11 @@ catch(Exception $e){
 }
 $requete = $bdd->query(
 'SELECT *
- FROM utilisateur
+ FROM utilisateur 
  WHERE login = "inna.sarib@gmail.com" AND mdp= "aaaaaaa";'
 );
 
  while($donnees = $requete->fetch()){
-	 echo $donnees['login'],
-   $donnees['nom'],
-   $donnees['prenom'];
+	 echo $donnees['login']. ";" .$donnees['nom']. ";" .$donnees['prenom'];
  };
 ?>
